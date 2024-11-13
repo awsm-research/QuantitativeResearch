@@ -1,0 +1,8 @@
+install.packages("ggplot2")
+install.packages("ggpubr")
+install.packages("effectsize")
+install.packages("rcompanion")
+install.packages("coin")
+install.packages("vcd")
+install.packages("dplyr")
+install.packages("moments")
