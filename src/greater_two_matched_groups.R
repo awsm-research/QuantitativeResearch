@@ -94,6 +94,54 @@ friedman.test(data)
 # - This suggests that there is a statistically significant difference in exam scores across the three subjects.
 # - The Friedman test indicates that at least one subject's scores are significantly different from the others when accounting for the fact that scores are from the same students.
 
+### Calculate the Effect Size ###
+# Pairwise Mann-Whitney U tests to calculate effect sizes for each subject comparison
+# Effect size formula for Mann-Whitney test:
+# - r = Z / sqrt(N)
+#   where:
+#     - Z is the z-score derived from the Mann-Whitney U test.
+#     - N is the total number of observations across all groups.
+# - This gives an approximation of effect size (r) for each comparison.
+
+# Data for the Friedman Test
+data <- data.frame(
+  Subject_A = c(4, 3, 8, 2, 3),
+  Subject_B = c(7, 5, 9, 7, 8),
+  Subject_C = c(9, 8, 9, 8, 9)
+)
+
+library(rcompanion)  # for wilcoxonR function to get effect size r
+
+# Calculate effect size for Subject A vs. Subject B
+test_AB <- wilcox.test(data$Subject_A, data$Subject_B, paired = TRUE)
+z_AB <- qnorm(test_AB$p.value / 2) * sign(test_AB$statistic - median(data$Subject_A - data$Subject_B))
+r_AB <- abs(z_AB) / sqrt(length(data$Subject_A))
+
+# Calculate effect size for Subject A vs. Subject C
+test_AC <- wilcox.test(data$Subject_A, data$Subject_C, paired = TRUE)
+z_AC <- qnorm(test_AC$p.value / 2) * sign(test_AC$statistic - median(data$Subject_A - data$Subject_C))
+r_AC <- abs(z_AC) / sqrt(length(data$Subject_A))
+
+# Calculate effect size for Subject B vs. Subject C
+test_BC <- wilcox.test(data$Subject_B, data$Subject_C, paired = TRUE)
+z_BC <- qnorm(test_BC$p.value / 2) * sign(test_BC$statistic - median(data$Subject_B - data$Subject_C))
+r_BC <- abs(z_BC) / sqrt(length(data$Subject_B))
+
+# Display effect sizes for each pairwise comparison
+r_AB
+r_AC
+r_BC
+
+# Interpretation of effect sizes (r) between each pair of subjects:
+# - 0.1 ≤ r < 0.3: Small effect
+# - 0.3 ≤ r < 0.5: Medium effect
+# - r ≥ 0.5: Large effect
+#
+# The effect sizes indicate the strength of difference in exam scores for each pair of subjects:
+# - r_AB: Effect size between Subject A and Subject B
+# - r_AC: Effect size between Subject A and Subject C
+# - r_BC: Effect size between Subject B and Subject C
+
 #################################
 
 # Cochran's Q Test
@@ -155,6 +203,11 @@ kruskal.test(scores ~ time_of_day)
 # - This indicates a statistically significant difference in exam scores
 #   based on the time of day the exam was taken (Morning, Afternoon, or Evening).
 # - The Kruskal-Wallis test suggests that exam score distributions vary by time of day
+
+### Practice: Write code to calculate the effect size ###
+### Hint: Refer to the effect size section Under Friedman test ###
+
+
 
 #################################
 
