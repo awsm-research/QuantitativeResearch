@@ -116,3 +116,13 @@ skew_grlivarea <- skewness(gr_liv_area)
 kurt_grlivarea <- kurtosis(gr_liv_area)
 print(paste("Skewness of GrLivArea: ", skew_grlivarea))
 print(paste("Kurtosis of GrLivArea: ", kurt_grlivarea))
+
+####################################
+
+# Wilcoxon rank-sum test = Mann-Whitney U test
+wilcox.test(smaller_houses$SalePrice, larger_houses$SalePrice)
+
+# Wilcoxon rank-sum test results:
+# W = 67224, p-value < 2.2e-16
+# Interpretation: Strong evidence of a significant difference in SalePrice
+# between smaller_houses and larger_houses (non-parametric test).
