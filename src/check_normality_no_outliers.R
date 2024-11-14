@@ -1,7 +1,7 @@
 library(ggplot2)
 library(dplyr)
 
-df <- read.csv("train.csv", header=TRUE)
+df <- read.csv("./data/house_price_data.csv", header=TRUE)
 
 # remove outliers
 df <- df[!df$SalePrice %in% boxplot.stats(df$SalePrice)$out,] 
