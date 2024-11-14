@@ -45,6 +45,12 @@ wilcox.test(postExam, preExam, paired=T, alternative = "greater")
 # which led to a continuity correction being applied to adjust the p-value.
 # This is a common issue in paired data and does not invalidate the result,
 # but it suggests that the test is using an approximation due to the ties in the data.
+scores = c(4,3,8,2,3,7,5,9,7,8) # re-organize the data to calculate effect size
+type = c("pre","pre","pre","pre","pre","post","post","post","post","post")
+df = data.frame(scores=scores, type=type)
+library(rcompanion)
+cliffDelta(scores~type, data = df)
+# small 0.1 / medium 0.3 / large >0.5
 
 #################################
 
