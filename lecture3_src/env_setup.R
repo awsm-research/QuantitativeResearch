@@ -1,0 +1,5 @@
+install.packages("rms")
+install.packages("boot")
+install.packages("Metrics")
+install.packages("ggplot2")
+install.packages("caret")
